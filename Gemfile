@@ -27,6 +27,10 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7' # a Sass-powered version of Bootstrap
 gem 'devise', '~> 4.4', '>= 4.4.3' # 'Flexible authentication solution for Rails with Warden'
 gem 'simple_form', '~> 4.0', '>= 4.0.1' # 'forms made easy'
 
+gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
+gem 'rails-ujs', '~> 0.1.0'
+
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
