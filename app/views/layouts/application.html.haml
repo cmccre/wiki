@@ -1,0 +1,19 @@
+!!!
+%html
+%head
+  %title Wiki
+  = csrf_meta_tags
+  = csp_meta_tag
+
+  = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+  = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+%body
+  %p.notice= notice
+  %p.alert= alert
+
+  =yield
+
+  %ul
+    %li= link_to "All Articles", root_path
+    - Category.all.each do |category|
+      %li= link_to category.name, articles_path(category: category.name)
