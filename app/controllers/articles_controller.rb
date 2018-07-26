@@ -6,12 +6,7 @@ class ArticlesController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show]
 
 	def index
-		@articles = Article.all
-		if params[:query]
-    		@articles = Article.all.where("name LIKE ?", "%#{params[:query]}%").order('created_at DESC')
-  		else
-  			@articles = Article.all.order('created_at DESC')
-  		end
+  		@articles = Article.search(params[:query])
 	end
 
 	def new
@@ -55,6 +50,14 @@ class ArticlesController < ApplicationController
 
 	def find_article
 		@article = Article.find(params[:id])
+	end
+
+	def self.search(query)
+	  if query
+	    where('title LIKE ?', "%#{query}%").order('created_at DESC')
+	  else
+	    order('created_at DESC') 
+	  end
 	end
 
 end
