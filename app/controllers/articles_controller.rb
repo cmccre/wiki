@@ -5,6 +5,8 @@ class ArticlesController < ApplicationController
 	# From Devise
 	before_action :authenticate_user!, except: [:index, :show]
 
+	before_action :authorize_admin!, only: [:destroy]
+
 	def index
   		@articles = Article.searchCurrent(params[:query])
 	end

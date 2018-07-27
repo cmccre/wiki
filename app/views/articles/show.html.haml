@@ -16,8 +16,8 @@
 				- if user_signed_in?
 					- if @article.is_current_article
 						= link_to "Edit", edit_article_path(@article), class: "btn btn-default"
-						
-					= link_to "Delete", article_path(@article), method: :delete, data: { confirm: "Confirm Permanent Deletion of Article" }, class: "btn btn-default"
+					- if current_user.is_admin
+						= link_to "Delete", article_path(@article), method: :delete, data: { confirm: "Confirm Permanent Deletion of Article" }, class: "btn btn-default"
 
 		- if @article.is_current_article
 			.col-md-4
