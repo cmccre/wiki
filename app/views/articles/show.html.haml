@@ -1,14 +1,34 @@
-%h1= @article.title
-%p
-edited by
-= @user.email
+.container
+	.row
+		.col-md-8
 
-%br
-%br
-%p= @article.content
+			%h1= @article.title
+			%p
+			edited by
+			= @user.email
 
-%br
-.btn-group
-	- if user_signed_in?
-		= link_to "Edit", edit_article_path(@article), class: "btn btn-default"
-		= link_to "Delete", article_path(@article), method: :delete, data: { confirm: "Confirm Permanent Deletion of Article" }, class: "btn btn-default"
+			%br
+			%br
+			%p= @article.content
+
+			%br
+			.btn-group
+				- if user_signed_in?
+					- if @article.is_current_article
+						= link_to "Edit", edit_article_path(@article), class: "btn btn-default"
+						
+					= link_to "Delete", article_path(@article), method: :delete, data: { confirm: "Confirm Permanent Deletion of Article" }, class: "btn btn-default"
+
+		- if @article.is_current_article
+			.col-md-4
+				%h3 Previous Revisions
+				- Article.where('title = ? AND is_current_article = ?', @article.title, false).order('created_at DESC').each do |a|
+					%br
+					= link_to a.created_at.strftime('%B %d, %Y, %l:%M:%S %p %Z'), a
+					%br
+		- else
+			.col-md-4
+				- @current_article = Article.where('title = ? AND is_current_article = ?', @article.title, true).take
+				%h3= link_to "Current Revision", @current_article
+
+

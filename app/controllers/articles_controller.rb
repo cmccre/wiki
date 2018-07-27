@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show]
 
 	def index
-  		@articles = Article.search(params[:query])
+  		@articles = Article.searchCurrent(params[:query])
 	end
 
 	def new
@@ -14,11 +14,17 @@ class ArticlesController < ApplicationController
 	end
 
 	def create
-		@article = current_user.articles.build(article_params)
-		if @article.save
-			redirect_to @article
-		else
+		if Article.exists?(['title LIKE ?', "%#{params[:title]}%"])
+			flash.alert = "May Not Create Article with Duplicate Title"
 			render 'new'
+		else
+			@article = current_user.articles.build(article_params)
+			@article.is_current_article = true
+			if @article.save
+				redirect_to @article
+			else
+				render 'new'
+			end
 		end
 	end
 
@@ -26,16 +32,28 @@ class ArticlesController < ApplicationController
 	end
 
 	def update
-		if @article.update(article_params)
-			redirect_to @article
+		@article.is_current_article = false
+		@article_revision = current_user.articles.build(article_params)
+		@article_revision.is_current_article = true
+
+		if @article.save && @article_revision.save
+			redirect_to @article_revision
 		else
 			render 'edit'
 		end
 	end
 
 	def destroy
+		if @article.is_current_article
+			@new_cur_article = Article.where('title = ? AND is_current_article = ?', @article.title, false).order('created_at DESC').first()
+			@new_cur_article.is_current_article = true
+			unless @new_cur_article.save
+				flash.alert = "Error in Deleting Article Revision"
+				render 'show'
+			end 
+		end
 		@article.destroy
-		redirect_to root_path
+		redirect_to @new_cur_article
 	end
 
 	def show
@@ -51,13 +69,4 @@ class ArticlesController < ApplicationController
 	def find_article
 		@article = Article.find(params[:id])
 	end
-
-	def self.search(query)
-	  if query
-	    where('title LIKE ?', "%#{query}%").order('created_at DESC')
-	  else
-	    order('created_at DESC') 
-	  end
-	end
-
 end
