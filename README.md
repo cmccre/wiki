@@ -1,13 +1,9 @@
 # TODO
 
-* User signup
+* User Types: Admin, Editor, Blocked
 
-* User login/logout
+* Admin Authorizations: Block/Unblock Users, Delete Revisions
 
-* Article search
-
-# Other Ideas
-
-* Admin can block Users, undo edits
+* Refine Search Relevance
 
 * Article content can contain media (detailed via markup language)
