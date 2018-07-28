@@ -6,4 +6,7 @@ class User < ApplicationRecord
   
   has_many :articles
 
+  def active_for_authentication?
+    super and self.is_active?
+  end
 end
