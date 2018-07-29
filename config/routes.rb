@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   resources :articles
   root 'articles#index'
   post '/', to: 'articles#index'
+  get '/users', to: 'users#index'
+  put '/users?user=:id', to: 'users#toggle_is_active'
 
 end

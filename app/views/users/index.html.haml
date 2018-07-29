@@ -1,0 +1,12 @@
+- @users.each do |user|
+	%h3= user.email
+	- if user.is_active?
+		Active
+		%br= link_to 'Inactivate', users_path(:user=>user.id), method: :post
+	- else
+		%b INACTIVE
+		%br= link_to 'Reactivate', users_path(:user=>user.id), method: :post
+	%br
+	%br
+
+
