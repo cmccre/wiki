@@ -17,5 +17,6 @@ class UsersController < ApplicationController
 			@user.is_active = true
 		end
 		@user.save
+		redirect_to users_path
 	end
 end

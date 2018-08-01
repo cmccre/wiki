@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'articles#index'
   post '/', to: 'articles#index'
   get '/users', to: 'users#index'
-  put '/users?user=:id', to: 'users#toggle_is_active'
+  put '/users/inactivate', to: 'users#toggle_is_active'
+  put '/users/activate', to: 'users#toggle_is_active'
 
 end
