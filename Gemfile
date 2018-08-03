@@ -26,6 +26,7 @@ gem 'haml', '~> 5.0', '>= 5.0.4' # Haml (HTML Abstraction Markup Language) is a 
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7' # a Sass-powered version of Bootstrap 3
 gem 'devise', '~> 4.4', '>= 4.4.3' # 'Flexible authentication solution for Rails with Warden'
 gem 'simple_form', '~> 4.0', '>= 4.0.1' # 'forms made easy'
+gem 'redcarpet', '~> 3.4' # A fast, safe and extensible Markdown to (X)HTML parser
 
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'rails-ujs', '~> 0.1.0'
