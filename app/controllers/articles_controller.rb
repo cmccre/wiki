@@ -17,7 +17,6 @@ class ArticlesController < ApplicationController
 
 	def create
 		if Article.exists?(['title LIKE ?', "%#{params[:article][:title]}%"])
-			#flash[:alert] = 
 			redirect_to new_article_path, alert: "May Not Create Article with Duplicate Title"
 		else
 			@article = current_user.articles.build(article_params)
@@ -52,8 +51,7 @@ class ArticlesController < ApplicationController
 			if @new_cur_article
 				@new_cur_article.is_current_article = true
 				unless @new_cur_article.save
-					flash.alert = "Error in Deleting Article Revision"
-					redirect_to @article
+					redirect_to @article, alert: "Error in Deleting Article Revision"
 				end
 				@article.destroy
 				redirect_to @new_cur_article
