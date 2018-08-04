@@ -17,8 +17,8 @@ class ArticlesController < ApplicationController
 
 	def create
 		if Article.exists?(['title LIKE ?', "%#{params[:article][:title]}%"])
-			flash.alert = "May Not Create Article with Duplicate Title"
-			redirect_to new_article_path
+			#flash[:alert] = 
+			redirect_to new_article_path, alert: "May Not Create Article with Duplicate Title"
 		else
 			@article = current_user.articles.build(article_params)
 			@article.is_current_article = true

@@ -20,11 +20,16 @@
         - else
           %li= link_to "Register", new_user_registration_path
           %li= link_to "Sign In", new_user_session_path
-          
-  %p.notice= notice
-  %p.alert= alert
+  %br
+  %br
+  %br
 
+  %p
   .container
     .row
       .col-md-8
+        - if flash[:alert]
+          %p=flash[:alert]
+        - if flash[:notice]
+          %p=flash[:notice]
         =yield
