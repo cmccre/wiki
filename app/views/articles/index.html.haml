@@ -9,4 +9,4 @@
 	%p
 		Published
 		= article.created_at.strftime('%B %d, %Y, %l:%M:%S %p %Z')
-	%p= truncate(article.content, length: 200)
+	%p= truncate(strip_tags(article.content), length: 200)
