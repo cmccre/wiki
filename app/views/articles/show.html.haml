@@ -22,10 +22,11 @@
 		- if @article.is_current_article
 			.col-md-4
 				%h3 Previous Revisions
-				- Article.where('title = ? AND is_current_article = ?', @article.title, false).order('created_at DESC').each do |a|
+				- @prev_revisions.each do |r|
 					%br
-					= link_to a.created_at.strftime('%B %d, %Y, %l:%M:%S %p %Z'), a
-					%br
+					= link_to r.created_at.strftime('%B %d, %Y, %l:%M:%S %p %Z'), r
+					%br 
+				%br= will_paginate @prev_revisions
 		- else
 			.col-md-4
 				- @current_article = Article.where('title = ? AND is_current_article = ?', @article.title, true).take

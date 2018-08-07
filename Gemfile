@@ -27,6 +27,9 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7' # a Sass-powered version of Bootstrap
 gem 'devise', '~> 4.4', '>= 4.4.3' # 'Flexible authentication solution for Rails with Warden'
 gem 'simple_form', '~> 4.0', '>= 4.0.1' # 'forms made easy'
 gem 'redcarpet', '~> 3.4' # A fast, safe and extensible Markdown to (X)HTML parser
+gem 'will_paginate', '~> 3.1', '>= 3.1.6' # simple API for performing paginated queries
+gem 'betterlorem', '~> 0.1.2' # A better Lorem Ipsum generator
+gem 'bootstrap-will_paginate', '~> 1.0' # Hooks into will_paginate to format the html to match Twitter Bootstrap styling
 
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'rails-ujs', '~> 0.1.0'

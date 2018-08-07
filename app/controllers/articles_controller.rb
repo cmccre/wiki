@@ -8,7 +8,7 @@ class ArticlesController < ApplicationController
 	before_action :authorize_admin, only: [:destroy]
 
 	def index
-  		@articles = Article.searchCurrent(params[:query])
+  		@articles = Article.searchCurrent(params[:query]).paginate(:page => params[:page], :per_page => 5)
 	end
 
 	def new
@@ -69,6 +69,9 @@ class ArticlesController < ApplicationController
 
 	def show
 		@user = User.find(@article.user_id)
+		if @article.is_current_article
+			@prev_revisions = Article.where('title = ? AND is_current_article = ?', @article.title, false).order('created_at DESC').paginate(:page => params[:page], :per_page => 20)
+		end
 	end
 
 	private

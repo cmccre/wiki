@@ -1,0 +1,10 @@
+%h3= user.email
+- if user.is_active?
+	Active
+	= link_to 'Inactivate', users_inactivate_path(:id=>user.id), method: :put
+- else
+	%b INACTIVE
+	= link_to 'Reactivate', users_activate_path(:id=>user.id), method: :put
+%br= link_to 'View Article Revisions', user
+%br
+%br

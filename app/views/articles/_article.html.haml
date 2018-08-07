@@ -1,0 +1,6 @@
+%div
+%h2= link_to article.title, article
+%p
+	Published
+	= article.created_at.strftime('%B %d, %Y, %l:%M:%S %p %Z')
+%p= truncate(strip_tags(article.content), length: 200)

@@ -1,12 +1,3 @@
-- @users.each do |user|
-	%h3= user.email
-	- if user.is_active?
-		Active
-		%br= link_to 'Inactivate', users_inactivate_path(:id=>user.id), method: :put
-	- else
-		%b INACTIVE
-		%br= link_to 'Reactivate', users_activate_path(:id=>user.id), method: :put
-	%br
-	%br
+%br= render @users
 
-
+%br= will_paginate
