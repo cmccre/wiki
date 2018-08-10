@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 	before_action :authorize_admin
 
 	def index
-  		@users = User.all.order(:email).paginate(:page => params[:page], :per_page => 5)
+  		@users = User.all.order(:username).paginate(:page => params[:page], :per_page => 5)
 	end
 
 	def show

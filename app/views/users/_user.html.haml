@@ -1,4 +1,4 @@
-%h3= user.email
+%h3= user.username
 - if user.is_active?
 	Active
 	= link_to 'Inactivate', users_inactivate_path(:id=>user.id), method: :put
