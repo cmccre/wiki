@@ -1,9 +1,7 @@
 # TODO
 
-* Refine Search Relevance
+* Refine Search Relevance: (1) Allow editors to categorize articles for searching (2) Allow search by publication date
 
-* Admin/Any User view other user activity? Profiles??
+* Add Article Category Index Pages
 
-* Article comments, ratings??
-
-* Content Filters??
+* Allow users to report bad content to admin for approval/deletion/blocking user
