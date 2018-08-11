@@ -8,7 +8,18 @@ class ArticlesController < ApplicationController
 	before_action :authorize_admin, only: [:destroy]
 
 	def index
-  		@articles = Article.searchCurrent(params[:query]).paginate(:page => params[:page], :per_page => 5)
+		@articles = Article.where('is_current_article = ?', true)
+		if params[:month] && params[:month] != "Month"
+			@articles = @articles.by_month(params[:month])
+		end
+		if params[:year] && params[:year] != "Year"
+			@articles = @articles.by_year(params[:year])
+		end
+		if params[:query] && params[:query] != ""
+	    	@articles = @articles.where('title LIKE ?', "%#{params[:query]}%")
+	    end
+	  	
+  		@articles = @articles.order('created_at DESC').paginate(:page => params[:page], :per_page => 5)
 	end
 
 	def new

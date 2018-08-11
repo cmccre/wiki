@@ -60,6 +60,8 @@ GEM
     bootstrap-will_paginate (1.0.0)
       will_paginate
     builder (3.2.3)
+    by_star (3.0.0)
+      activesupport (> 3)
     byebug (10.0.2)
     capybara (3.4.1)
       addressable
@@ -225,6 +227,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap-sass (~> 3.3, >= 3.3.7)
   bootstrap-will_paginate (~> 1.0)
+  by_star (~> 3.0)
   byebug
   capybara (>= 2.15, < 4.0)
   chromedriver-helper
