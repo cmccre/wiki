@@ -11,5 +11,8 @@
 		= f.input :title, input_html: { class: 'form-control' }
 
 	.form-group
-		= f.input :content, input_html: { class: 'form-control' }	
+		= f.input :content, input_html: { class: 'form-control' }
+
+	.form-group
+		= f.input :tag_list, placeholder: "Tag with Comma-Separated Terms", input_html: { class: 'form-control' }	
 	= f.button :submit, class: "btn btn-primary"

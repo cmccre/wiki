@@ -62,4 +62,8 @@ Rails.application.configure do
   # Required for Devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
+  ActsAsTaggableOn.force_lowercase = true
+  ActsAsTaggableOn.remove_unused_tags = true
+  ActsAsTaggableOn.default_parser = NonAlphaNumericParser
+
 end

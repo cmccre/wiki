@@ -31,6 +31,7 @@ gem 'will_paginate', '~> 3.1', '>= 3.1.6' # simple API for performing paginated 
 gem 'betterlorem', '~> 0.1.2' # A better Lorem Ipsum generator
 gem 'bootstrap-will_paginate', '~> 1.0' # Hooks into will_paginate to format the html to match Twitter Bootstrap styling
 gem 'by_star', '~> 3.0' # ActiveRecord and Mongoid extension for easier date scopes and time ranges
+gem 'acts-as-taggable-on', '~> 6.0' # Tag a single model on several contexts
 
 
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'

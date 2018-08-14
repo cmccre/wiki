@@ -6,6 +6,11 @@
 			%p
 			edited by
 			= @user.username
+			%br
+			- if @article.tag_list.any?
+				\#TAGS:
+				- @article.tag_list.each do |t|
+					= link_to t, articles_path(:tag=>t)
 
 			%br
 			%br
@@ -20,16 +25,16 @@
 						= link_to "Delete", article_path(@article), method: :delete, data: { confirm: "Confirm Permanent Deletion of Article" }, class: "btn btn-default"
 
 		- if @article.is_current_article
-			.col-md-4
-				%h3 Previous Revisions
+			.col-md-2.pull-right
+				%h4 Previous Revisions
 				- @prev_revisions.each do |r|
 					%br
-					= link_to r.created_at.strftime('%B %d, %Y, %l:%M:%S %p %Z'), r
+					= link_to r.created_at.strftime('%b %d, %Y, %l:%M %p'), r
 					%br 
 				%br= will_paginate @prev_revisions
 		- else
-			.col-md-4
+			.col-md-2.pull-right
 				- @current_article = Article.where('title = ? AND is_current_article = ?', @article.title, true).take
-				%h3= link_to "Current Revision", @current_article
+				%h4= link_to "Current Revision", @current_article
 
 

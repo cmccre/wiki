@@ -1,28 +1,40 @@
-= form_tag(root_path, method: :get) do
-	.form-group
-		= text_field_tag :query, params[:query], label: false, size: 125, placeholder: "Query by Article Title and/or Publication Date", input_html: { class: 'form-control'}
-		%br
-		%br
-		%select.custom-select{:name => "month"}
-			%option{:selected => "selected"} Month
-			%option{:value => "01"} January
-			%option{:value => "02"} February
-			%option{:value => "03"} March
-			%option{:value => "04"} April
-			%option{:value => "05"} May
-			%option{:value => "06"} June
-			%option{:value => "07"} July
-			%option{:value => "08"} August
-			%option{:value => "09"} September
-			%option{:value => "10"} October
-			%option{:value => "11"} November
-			%option{:value => "12"} December
-		%select.custom-select{:name => "year"}
-			%option{:selected => "selected"} Year
-			%option{:value => "2018"} 2018
+.container
+	.row
 
-	= submit_tag "Search", name: nil, class: "btn btn-primary"
+		.col-md-8
+			= form_tag(root_path, method: :get) do
+				.form-group
+					= text_field_tag :query, params[:query], label: false, size: 50, placeholder: "Query by Article Title", input_html: { class: 'form-control'}
+					= text_field_tag :tag_query, params[:tag_query], label: false, size: 50, placeholder: "Query by Tag", input_html: { class: 'form-control'}
+					%br
+					%br
+					%select.custom-select{:name => "month"}
+						%option{:selected => "selected"} Month
+						%option{:value => "01"} January
+						%option{:value => "02"} February
+						%option{:value => "03"} March
+						%option{:value => "04"} April
+						%option{:value => "05"} May
+						%option{:value => "06"} June
+						%option{:value => "07"} July
+						%option{:value => "08"} August
+						%option{:value => "09"} September
+						%option{:value => "10"} October
+						%option{:value => "11"} November
+						%option{:value => "12"} December
+					%select.custom-select{:name => "year"}
+						%option{:selected => "selected"} Year
+						%option{:value => "2018"} 2018
 
-%br= render @articles
+				= submit_tag "Search", name: nil, class: "btn btn-primary"
 
-%br= will_paginate
+			%br= render @articles
+
+			%br= will_paginate
+
+		.col-md-2.pull-right
+			%h3 TOP #TAGS
+			- @tags.each do |t|
+				%br
+				= link_to t.name, articles_path(:tag=>t.name)
+				%br

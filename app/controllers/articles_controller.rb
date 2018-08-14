@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
 
 	before_action :find_article, only: [:show, :edit, :update, :destroy]
+	before_action :find_top_tags, only: [:index]
 
 	# From Devise
 	before_action :authenticate_user!, except: [:index, :show]
@@ -8,7 +9,11 @@ class ArticlesController < ApplicationController
 	before_action :authorize_admin, only: [:destroy]
 
 	def index
+		
 		@articles = Article.where('is_current_article = ?', true)
+		if params[:tag]
+			@articles = @articles.tagged_with(params[:tag])
+		end
 		if params[:month] && params[:month] != "Month"
 			@articles = @articles.by_month(params[:month])
 		end
@@ -18,7 +23,10 @@ class ArticlesController < ApplicationController
 		if params[:query] && params[:query] != ""
 	    	@articles = @articles.where('title LIKE ?', "%#{params[:query]}%")
 	    end
-	  	
+	    if params[:tag_query] && params[:tag_query] != ""
+	    	@articles = @articles.tagged_with(params[:tag_query], :wild => true, :any =>true)
+	    end
+	    
   		@articles = @articles.order('created_at DESC').paginate(:page => params[:page], :per_page => 5)
 	end
 
@@ -87,8 +95,12 @@ class ArticlesController < ApplicationController
 
 	private
 
+	def find_top_tags
+		@tags = ActsAsTaggableOn::Tag.where.not('name LIKE ?', '% %').most_used(10)
+	end
+
 	def article_params
-		params.require(:article).permit(:title, :content)
+		params.require(:article).permit(:title, :content, :tag_list)
 	end
 
 	def find_article
