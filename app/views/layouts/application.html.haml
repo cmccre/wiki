@@ -15,6 +15,7 @@
         - if user_signed_in?
           - if current_user.is_admin?
             %li= link_to "Manage Users", users_path
+            %li= link_to "Manage Article Reports", article_reports_path
           %li= link_to "New Article", new_article_path
           %li= link_to "Edit Account", edit_user_registration_path
           %li= link_to "Sign Out", destroy_user_session_path, method: :delete

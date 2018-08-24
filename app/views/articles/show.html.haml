@@ -22,7 +22,11 @@
 					- if @article.is_current_article
 						= link_to "Edit", edit_article_path(@article), class: "btn btn-default"
 					- if current_user.is_admin
-						= link_to "Delete", article_path(@article), method: :delete, data: { confirm: "Confirm Permanent Deletion of Article" }, class: "btn btn-default"
+						= link_to "Delete", article_path(@article), method: :delete, data: { confirm: "Confirm Permanent Deletion of Article Revision" }, class: "btn btn-default"
+						- if @article.request_approval
+							= link_to "Approve", approve_path(@article), method: :approve, data: { confirm: "Confirm Permanent Approval of Article Revision" }, class: "btn btn-default"
+					- unless current_user.is_admin or @article.approved or @article.request_approval
+						= link_to "Report", report_path(@article), method: :report, data: { confirm: "Confirm Request for Admin Approval" }, class: "btn btn-default"
 
 		- if @article.is_current_article
 			.col-md-2.pull-right

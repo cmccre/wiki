@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_13_212237) do
+ActiveRecord::Schema.define(version: 2018_08_24_190533) do
 
   create_table "articles", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2018_08_13_212237) do
     t.string "title"
     t.text "content"
     t.integer "user_id"
+    t.boolean "request_approval"
+    t.boolean "approved"
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 

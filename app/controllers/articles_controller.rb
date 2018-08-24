@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
 
-	before_action :find_article, only: [:show, :edit, :update, :destroy]
+	before_action :find_article, only: [:show, :edit, :update, :destroy, :report, :approve]
 	before_action :find_top_tags, only: [:index]
 
 	# From Devise
@@ -84,6 +84,27 @@ class ArticlesController < ApplicationController
 			redirect_to @cur_article
 		end
 		
+	end
+
+	def article_reports
+		@articles = Article.where('request_approval = ?', true).order('created_at DESC').paginate(:page => params[:page], :per_page => 5)
+	end
+
+	def report
+		@article.request_approval = true
+		unless @article.save
+			redirect_to @article, alert: "Error in Reporting Article Revision"
+		end
+		redirect_to @article
+	end
+
+	def approve
+		@article.approved = true
+		@article.request_approval = false
+		unless @article.save
+			redirect_to @article, alert: "Error in Approving Article Revision"
+		end
+		redirect_to @article
 	end
 
 	def show
