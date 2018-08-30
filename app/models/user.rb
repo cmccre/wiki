@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable
   
-  validates :username, uniqueness: true
+  validates :username, uniqueness: true, presence: true
   has_many :articles
 
   def active_for_authentication?

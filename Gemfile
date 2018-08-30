@@ -32,7 +32,8 @@ gem 'betterlorem', '~> 0.1.2' # A better Lorem Ipsum generator
 gem 'bootstrap-will_paginate', '~> 1.0' # Hooks into will_paginate to format the html to match Twitter Bootstrap styling
 gem 'by_star', '~> 3.0' # ActiveRecord and Mongoid extension for easier date scopes and time ranges
 gem 'acts-as-taggable-on', '~> 6.0' # Tag a single model on several contexts
-
+gem 'factory_bot', '~> 4.11' # provides a framework and DSL for defining and using factories - less error-prone, more explicit, and all-around easier to work with than fixtures
+gem 'faker', '~> 1.9', '>= 1.9.1' # Faker, a port of Data::Faker from Perl, is used to easily generate fake data: names, addresses, phone numbers, etc.
 
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'rails-ujs', '~> 0.1.0'

@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_24_190533) do
+ActiveRecord::Schema.define(version: 2018_08_25_200141) do
 
   create_table "articles", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "is_current_article"
     t.string "title"
     t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.boolean "request_approval"
-    t.boolean "approved"
+    t.boolean "is_current_article"
+    t.boolean "request_approval", default: false
+    t.boolean "approved", default: false
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
@@ -67,10 +67,6 @@ ActiveRecord::Schema.define(version: 2018_08_24_190533) do
     t.integer "failed_attempts", default: 0
     t.string "unlock_token"
     t.datetime "locked_at"
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
