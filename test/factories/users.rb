@@ -1,7 +1,7 @@
 FactoryBot.define do  
 	factory :user do    
-		username { Faker::Internet.user_name(5..8) }  
-		password { Faker::Internet.password(6..10) }
+		username { Faker::Internet.user_name(5) }  
+		password { Faker::Internet.password(6) }
 		is_admin { false }
 		is_active { true }
 
